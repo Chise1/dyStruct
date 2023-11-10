@@ -1,4 +1,4 @@
-package dyStruct
+package dynamicstruct
 
 import (
 	"testing"

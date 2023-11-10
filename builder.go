@@ -1,4 +1,4 @@
-package dyStruct
+package dynamicstruct
 
 import "reflect"
 
@@ -141,6 +141,9 @@ func MergeStructs(values ...interface{}) Builder {
 }
 
 func (b *builderImpl) AddField(name string, typ interface{}, tag string) Builder {
+	if ToTitle {
+		name = UpperFirstAlphabet(name)
+	}
 	return b.addField(name, "", typ, tag, false)
 }
 
@@ -156,6 +159,9 @@ func (b *builderImpl) addField(name string, pkg string, typ interface{}, tag str
 }
 
 func (b *builderImpl) RemoveField(name string) Builder {
+	if ToTitle {
+		name = UpperFirstAlphabet(name)
+	}
 	for i := range b.fields {
 		if b.fields[i].name == name {
 			b.fields = append(b.fields[:i], b.fields[i+1:]...)
@@ -166,6 +172,9 @@ func (b *builderImpl) RemoveField(name string) Builder {
 }
 
 func (b *builderImpl) HasField(name string) bool {
+	if ToTitle {
+		name = UpperFirstAlphabet(name)
+	}
 	for i := range b.fields {
 		if b.fields[i].name == name {
 			return true
@@ -175,6 +184,9 @@ func (b *builderImpl) HasField(name string) bool {
 }
 
 func (b *builderImpl) GetField(name string) FieldConfig {
+	if ToTitle {
+		name = UpperFirstAlphabet(name)
+	}
 	for i := range b.fields {
 		if b.fields[i].name == name {
 			return b.fields[i]
