@@ -155,7 +155,11 @@ func UpdateFromJson(writer Writer, linkName []string, jsonData []byte, unmarshal
 				errs = append(errs, validate(obj.Index(i)))
 			}
 			if len(errs) > 0 {
-				return errors.Join(errs...)
+				var errString []string
+				for _, err := range errs {
+					errString = append(errString, err.Error())
+				}
+				return errors.New(strings.Join(errString, ","))
 			}
 		}
 	}
